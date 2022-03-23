@@ -14,6 +14,9 @@ public class Rocket {
         if (code.length() != 8) throw new Exception("The format of the code is incorrect");
     }
 
+
+
+
     public String getCode() {
         return code;
     }
