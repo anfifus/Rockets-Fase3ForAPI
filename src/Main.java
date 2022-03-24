@@ -54,28 +54,29 @@ public class Main {
         }
     }
 
-    private static void moveRockets(List<Rocket> rocketList) throws Exception{
+    private static void moveRockets(List<Rocket> rocketList) throws Exception {
         //accelerateRocketsAndShowResults(rocketList);
         Rocket rocket = null;
         int times = 0;
         times = askNumberOfTimes();
-        rocket = chooseRocket(rocketList);
-        accelerateRockets(rocket,times);
+
+        accelerateRockets(rocket, times);
         //slowDownAndAccelerateAndShowResults(rocketList);
         times = askNumberOfTimes();
         rocket = chooseRocket(rocketList);
-        accelerateFirstRocketThreeTimes(rocket,times)
-        slowDownRockets(rocket,times);
-        accelerateRockets(rocket,times);
+        accelerateRocketsThreeTimes(rocketList, times);
+        showActualPower(rocketList);
+        slowDownAndAccelerate();
+
+
         //accelerateRocketsMaxPower(rocketList);
 
     }
 
 
-
     private static Rocket chooseRocket(List<Rocket> rocketList) throws Exception {
         Scanner scan = new Scanner(System.in);
-        return checkRocket(rocketList,scan.nextInt());
+        return checkRocket(rocketList, scan.nextInt());
     }
 
     private static Rocket checkRocket(List<Rocket> rocketList, int chooseRocket) throws Exception {
@@ -95,7 +96,9 @@ public class Main {
             rocket.increasePower();
         }
     }
-    private static void slowDownRockets(Rocket rocket, int numBrakeRockets) {
+
+    private static void slowDownRockets(int numBrakeRockets) {
+        rocket = chooseRocket(rocketList);
         for (int i = 0; i < numBrakeRockets; i++) {
             rocket.decreasePower();
         }
@@ -106,22 +109,21 @@ public class Main {
         showActualPower(rocketList);
     }
 
-    private static void accelerateFirstRocketThreeTimes(List<Rocket> rocketList) {
+    private static void accelerateRocketsThreeTimes(List<Rocket> rocketList, int times) {
 
 
-        for (int i = 0; i < NUM_ACCELERATION_ROCKETS; i++) {
-            for (Rocket currentRocket : rocketList) {
-                currentRocket.increasePower();
-            }
+        for (Rocket currentRocket : rocketList) {
+            accelerateRockets(currentRocket, times);
         }
     }
 
     private static void slowDownAndAccelerateAndShowResults(List<Rocket> rocketList) {
-       // slowDownAndAccelerate(rocketList);
+        // slowDownAndAccelerate(rocketList);
         showActualPower(rocketList);
     }
 
     private static void slowDownAndAccelerate(List<Rocket> rocketList) {
+        slowDownRockets(rocket, times);
         for (Rocket currentRocket : rocketList) {
             if (currentRocket.getCode().equals(FIRST_ROCKET)) {
                 for (int i = 0; i < NUM_SLOW_DOWN_FIRST_ROCKET; i++) {
